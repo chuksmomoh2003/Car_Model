@@ -74,7 +74,7 @@ jobs:
       # Authenticate Docker to Google Artifact Registry
       - name: 'Docker Auth'
         run: |
-          gcloud auth configure-docker ${ env.GAR_LOCATION }-docker.pkg.dev --quiet
+          gcloud auth configure-docker ${{ env.GAR_LOCATION }}-docker.pkg.dev --quiet
 
       # Build and push Docker image
       - name: 'Build and push Docker container'
@@ -96,3 +96,4 @@ jobs:
         run: |-
           kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} car-price-container=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${GITHUB_SHA}
           kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }}
+
