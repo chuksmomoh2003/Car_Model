@@ -94,6 +94,6 @@ jobs:
       # Deploy to GKE
       - name: 'Deploy to GKE'
         run: |-
-          kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} car-price-container=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${GITHUB_SHA}
+          kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} car-price-predictor=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${GITHUB_SHA}
           kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }}
 
