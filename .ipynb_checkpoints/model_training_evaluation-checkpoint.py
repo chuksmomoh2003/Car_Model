@@ -56,7 +56,6 @@ pipeline = Pipeline(steps=[
     num_leaves=49,
     min_child_samples=2,
     learning_rate=0.01340213629132974,
-    max_bin=2**10,  # Since `log_max_bin` is 10, max_bin is 2^10 = 1024
     colsample_bytree=0.3742613512959107,
     reg_alpha=0.03411846537405745,
     reg_lambda=4.1425597420878315
