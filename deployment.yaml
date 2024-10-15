@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: car-price-predictor-deployment
+  labels:
+    app: car-price-predictor
+spec:
+  replicas: 3  # Number of replicas
+  selector:
+    matchLabels:
+      app: car-price-predictor
+  template:
+    metadata:
+      labels:
+        app: car-price-predictor
+    spec:
+      containers:
+        - name: car-price-predictor
+          image: us-central1-docker.pkg.dev/hypnotic-guard-436705-n3/car-price/car-price:v1
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: car-price-predictor-service
+spec:
+  type: LoadBalancer  # Load Balancer service for GKE
+  ports:
+    - port: 80
+      targetPort: 8000
+  selector:
+    app: car-price-predictor
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: car-price-predictor-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: car-price-predictor-deployment
+  minReplicas: 3  # Minimum number of pods
+  maxReplicas: 10  # Maximum number of pods to auto-scale
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50  # Auto-scale when CPU utilization exceeds 50%
+
+

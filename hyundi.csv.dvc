@@ -1,0 +1,5 @@
+outs:
+- md5: fab5751bbc94643b976f1957c05991a0
+  size: 245355
+  hash: md5
+  path: hyundi.csv

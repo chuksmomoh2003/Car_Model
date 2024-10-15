@@ -1,0 +1,38 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python data_prep.py
+    deps:
+    - path: data_prep.py
+      hash: md5
+      md5: 59f6d8490d2b77494cc6037a446ff160
+      size: 673
+    - path: hyundi.csv
+      hash: md5
+      md5: fab5751bbc94643b976f1957c05991a0
+      size: 245355
+    outs:
+    - path: processed_hyundi.csv
+      hash: md5
+      md5: 4d964ed30989bf0dda325593dfd2a337
+      size: 239176
+  train:
+    cmd: python model_training_evaluation.py
+    deps:
+    - path: model_training_evaluation.py
+      hash: md5
+      md5: 3a3fe9ef8842f067f360f61014118a40
+      size: 3300
+    - path: processed_hyundi.csv
+      hash: md5
+      md5: 4d964ed30989bf0dda325593dfd2a337
+      size: 239176
+    outs:
+    - path: car_price_pipeline.pkl
+      hash: md5
+      md5: 3eb4de72099a12c77421988df3852f7e
+      size: 2330873
+    - path: evaluation_results.txt
+      hash: md5
+      md5: 032cd36c9903258f0d53d2f8cf2e3f05
+      size: 101

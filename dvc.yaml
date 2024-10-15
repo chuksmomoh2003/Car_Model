@@ -1,0 +1,23 @@
+stages:
+  prepare:
+    cmd: python data_prep.py
+    deps:
+      - hyundi.csv  # Your raw dataset
+      - data_prep.py  # Data preparation script
+    outs:
+      - processed_hyundi.csv  # Output after data preparation
+
+  train:
+    cmd: python model_training_evaluation.py
+    deps:
+      - processed_hyundi.csv  # The cleaned data from the previous stage
+      - model_training_evaluation.py  # Model training and evaluation script
+    outs:
+      - car_price_pipeline.pkl  # Trained model pipeline (including preprocessing and model)
+      - evaluation_results.txt  # File containing evaluation metrics
+
+
+
+
+
+
