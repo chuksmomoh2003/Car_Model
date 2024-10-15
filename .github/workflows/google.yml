@@ -42,8 +42,8 @@ on:
 env:
   PROJECT_ID: 'hypnotic-guard-436705-n3'  # Your Google Cloud project ID
   GAR_LOCATION: 'us-central1'  # Your region
-  GKE_CLUSTER: 'car-price-predictor'  # Corrected GKE cluster name
-  GKE_REGION: 'us-central1'  # Corrected cluster region
+  GKE_CLUSTER: 'car-price-predictor'  # Your GKE cluster name
+  GKE_REGION: 'us-central1'  # Your cluster region
   DEPLOYMENT_NAME: 'car-price-predictor-deployment'  # Your deployment name
   REPOSITORY: 'car-price'  # Artifact Registry repository name
   IMAGE: 'car-price'
@@ -68,7 +68,7 @@ jobs:
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v2'
         with:
-          workload_identity_provider: 'projects/hypnotic-guard-436705-n3/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          workload_identity_provider: 'projects/376773430110/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
           service_account: '${{ env.SERVICE_ACCOUNT_EMAIL }}'
 
       # Authenticate Docker to Google Artifact Registry
@@ -99,3 +99,4 @@ jobs:
         run: |-
           kubectl set image deployment/${{ env.DEPLOYMENT_NAME }} car-price-container=${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${GITHUB_SHA}
           kubectl rollout status deployment/${{ env.DEPLOYMENT_NAME }}
+
