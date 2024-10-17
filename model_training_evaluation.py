@@ -52,14 +52,14 @@ pipeline = Pipeline(steps=[
     metric='mse',
     n_jobs=-1,
     random_state=101,
-    n_estimators=546,
-    num_leaves=49,
-    min_child_samples=2,
-    learning_rate=0.01340213629132974,
-    max_bin=2**10,  # Since `log_max_bin` is 10, max_bin is 2^10 = 1024
-    colsample_bytree=0.3742613512959107,
-    reg_alpha=0.03411846537405745,
-    reg_lambda=4.1425597420878315
+    n_estimators=292,
+    num_leaves=44,
+    min_child_samples=13,
+    learning_rate=0.018229428163005504,
+    max_bin=2**9,  # Since `log_max_bin` is 9, max_bin is 2^9 = 512
+    colsample_bytree=0.353714329942247,
+    reg_alpha=0.0009765625,
+    reg_lambda=0.0009765625
     ))
 ])
 
